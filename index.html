@@ -3,21 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inscription - Transform Academy</title>
+    <title>🎯 Transform Academy - Tarif Founder Member</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 20px;
         }
-        
+
         .container {
             max-width: 800px;
             margin: 0 auto;
@@ -25,265 +25,175 @@
             border-radius: 20px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
             overflow: hidden;
-            animation: fadeInUp 0.6s ease-out;
         }
-        
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
+
         .header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             padding: 40px 30px;
             text-align: center;
-            position: relative;
-            overflow: hidden;
         }
-        
-        .header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
-            background-size: 50px 50px;
-            animation: moveBackground 20s linear infinite;
-        }
-        
-        @keyframes moveBackground {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(50px, 50px); }
-        }
-        
+
         .header h1 {
-            font-size: 32px;
+            font-size: 2.5em;
             margin-bottom: 10px;
-            position: relative;
-            z-index: 1;
         }
-        
+
         .header p {
-            font-size: 18px;
+            font-size: 1.2em;
             opacity: 0.95;
-            position: relative;
-            z-index: 1;
         }
-        
+
+        .founder-badge {
+            background: #f39c12;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            display: inline-block;
+            margin-top: 15px;
+            font-weight: bold;
+            font-size: 0.9em;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .success-message {
+            background: #d4edda;
+            border: 2px solid #28a745;
+            color: #155724;
+            padding: 20px;
+            margin: 30px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .success-message h3 {
+            font-size: 1.3em;
+            margin-bottom: 10px;
+        }
+
         .content {
-            padding: 40px 30px;
+            padding: 30px;
         }
-        
-        .offers {
+
+        .section-title {
+            font-size: 1.8em;
+            color: #2c3e50;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .pricing-cards {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 20px;
             margin-bottom: 40px;
         }
-        
-        .offer-card {
+
+        .pricing-card {
             border: 2px solid #e0e0e0;
             border-radius: 15px;
             padding: 25px;
+            transition: all 0.3s;
             cursor: pointer;
-            transition: all 0.3s ease;
             position: relative;
-            background: white;
         }
-        
-        .offer-card:hover {
+
+        .pricing-card:hover {
             border-color: #667eea;
             transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.2);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
         }
-        
-        .offer-card.selected {
+
+        .pricing-card.selected {
             border-color: #667eea;
-            background: linear-gradient(135deg, #f8f9ff 0%, #fff 100%);
+            background: linear-gradient(135deg, #f8f9ff 0%, #e8ebff 100%);
             border-width: 3px;
-            animation: pulse 0.5s ease;
         }
-        
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.02); }
-        }
-        
-        .offer-card input[type="radio"] {
+
+        .pricing-card .badge {
             position: absolute;
-            top: 20px;
+            top: -12px;
             right: 20px;
-            width: 20px;
-            height: 20px;
-            cursor: pointer;
-            accent-color: #667eea;
-        }
-        
-        .offer-badge {
-            position: absolute;
-            top: -10px;
-            left: 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #f39c12;
             color: white;
             padding: 5px 15px;
             border-radius: 20px;
-            font-size: 12px;
+            font-size: 0.85em;
             font-weight: bold;
-            display: none;
         }
-        
-        .offer-card.selected .offer-badge {
-            display: block;
-            animation: slideDown 0.3s ease;
-        }
-        
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .offer-name {
-            font-size: 24px;
-            font-weight: bold;
-            color: #667eea;
-            margin-bottom: 10px;
-        }
-        
-        .offer-price {
-            font-size: 32px;
-            font-weight: bold;
-            color: #333;
+
+        .pricing-card h3 {
+            font-size: 1.5em;
+            color: #2c3e50;
             margin-bottom: 15px;
         }
-        
-        .offer-features {
+
+        .pricing-card .price {
+            font-size: 2.2em;
+            color: #667eea;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .pricing-card .original-price {
+            text-decoration: line-through;
+            color: #95a5a6;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+        }
+
+        .pricing-card ul {
             list-style: none;
-            margin-top: 15px;
+            margin-bottom: 20px;
         }
-        
-        .offer-features li {
+
+        .pricing-card li {
             padding: 8px 0;
-            padding-left: 25px;
-            position: relative;
             color: #555;
-            animation: fadeIn 0.3s ease forwards;
-            opacity: 0;
+            position: relative;
+            padding-left: 25px;
         }
-        
-        .offer-features li:nth-child(1) { animation-delay: 0.1s; }
-        .offer-features li:nth-child(2) { animation-delay: 0.2s; }
-        .offer-features li:nth-child(3) { animation-delay: 0.3s; }
-        .offer-features li:nth-child(4) { animation-delay: 0.4s; }
-        .offer-features li:nth-child(5) { animation-delay: 0.5s; }
-        .offer-features li:nth-child(6) { animation-delay: 0.6s; }
-        
-        @keyframes fadeIn {
-            to {
-                opacity: 1;
-            }
-        }
-        
-        .offer-features li:before {
+
+        .pricing-card li:before {
             content: "✓";
             position: absolute;
             left: 0;
-            color: #667eea;
+            color: #28a745;
             font-weight: bold;
         }
-        
+
         .form-group {
-            margin-bottom: 25px;
-            animation: slideIn 0.5s ease forwards;
-            opacity: 0;
+            margin-bottom: 20px;
         }
-        
-        .form-group:nth-child(1) { animation-delay: 0.1s; }
-        .form-group:nth-child(2) { animation-delay: 0.2s; }
-        .form-group:nth-child(3) { animation-delay: 0.3s; }
-        .form-group:nth-child(4) { animation-delay: 0.4s; }
-        
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateX(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-        
+
         .form-group label {
             display: block;
             margin-bottom: 8px;
+            color: #2c3e50;
             font-weight: 600;
-            color: #333;
         }
-        
+
         .form-group input,
         .form-group select {
             width: 100%;
-            padding: 12px 15px;
+            padding: 12px;
             border: 2px solid #e0e0e0;
             border-radius: 8px;
-            font-size: 16px;
-            transition: all 0.3s;
+            font-size: 1em;
+            transition: border-color 0.3s;
         }
-        
+
         .form-group input:focus,
         .form-group select:focus {
             outline: none;
             border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-            transform: translateY(-2px);
         }
-        
-        .form-group input.valid {
-            border-color: #28a745;
-        }
-        
-        .form-group input.invalid {
-            border-color: #dc3545;
-        }
-        
-        .validation-message {
-            font-size: 13px;
-            margin-top: 5px;
-            display: none;
-        }
-        
-        .validation-message.show {
-            display: block;
-            animation: fadeIn 0.3s ease;
-        }
-        
-        .validation-message.error {
-            color: #dc3545;
-        }
-        
-        .validation-message.success {
-            color: #28a745;
-        }
-        
-        .required {
-            color: #e74c3c;
-        }
-        
+
         .submit-btn {
             width: 100%;
             padding: 15px;
@@ -291,205 +201,122 @@
             color: white;
             border: none;
             border-radius: 10px;
-            font-size: 18px;
+            font-size: 1.2em;
             font-weight: bold;
             cursor: pointer;
-            transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
+            transition: transform 0.2s;
         }
-        
-        .submit-btn::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.3);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
-        }
-        
-        .submit-btn:hover::before {
-            width: 300px;
-            height: 300px;
-        }
-        
+
         .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+            transform: scale(1.02);
         }
-        
-        .submit-btn:active {
-            transform: translateY(0);
-        }
-        
-        .submit-btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
-        
-        .submit-btn span {
-            position: relative;
-            z-index: 1;
-        }
-        
-        .loading-spinner {
-            display: none;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            border-top-color: white;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-            margin: 0 auto;
-        }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        
-        .submit-btn.loading .loading-spinner {
-            display: block;
-        }
-        
-        .submit-btn.loading span {
-            display: none;
-        }
-        
+
         .payment-instructions {
-            display: none;
-            margin-top: 30px;
+            margin-top: 40px;
             padding: 30px;
-            background: #f8f9ff;
+            background: #f8f9fa;
             border-radius: 15px;
-            border-left: 5px solid #667eea;
-            animation: slideDown 0.5s ease;
         }
-        
-        .payment-instructions.show {
-            display: block;
-        }
-        
-        .payment-instructions h3 {
-            color: #667eea;
-            margin-bottom: 20px;
-            font-size: 24px;
-        }
-        
+
         .payment-method {
             background: white;
             padding: 20px;
-            border-radius: 10px;
             margin-bottom: 15px;
-            border: 1px solid #e0e0e0;
-            transition: all 0.3s;
+            border-radius: 10px;
+            border: 2px solid #e0e0e0;
         }
-        
-        .payment-method:hover {
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transform: translateY(-2px);
-        }
-        
+
         .payment-method h4 {
-            color: #333;
-            margin-bottom: 10px;
-            font-size: 18px;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.2em;
         }
-        
+
         .payment-detail {
-            background: #f0f0f0;
-            padding: 10px 15px;
-            border-radius: 5px;
-            margin: 8px 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
+            padding: 10px;
+            background: #f8f9fa;
+            margin-bottom: 10px;
+            border-radius: 5px;
         }
-        
+
+        .payment-detail strong {
+            color: #667eea;
+        }
+
         .copy-btn {
-            padding: 8px 15px;
+            padding: 5px 15px;
             background: #667eea;
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 14px;
-            transition: all 0.3s;
-            margin-top: 5px;
+            font-size: 0.9em;
         }
-        
+
         .copy-btn:hover {
             background: #5568d3;
-            transform: scale(1.05);
         }
-        
-        .copy-btn:active {
-            transform: scale(0.95);
-        }
-        
-        .copy-btn.copied {
-            background: #28a745;
-        }
-        
-        .info-box {
+
+        .important-note {
             background: #fff3cd;
-            border: 1px solid #ffc107;
-            border-radius: 8px;
+            border: 2px solid #ffc107;
             padding: 20px;
+            border-radius: 10px;
             margin-top: 20px;
+        }
+
+        .important-note h4 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+
+        .important-note ul {
+            list-style: none;
             color: #856404;
         }
-        
-        .success-message {
-            display: none;
-            background: #d4edda;
-            border: 1px solid #c3e6cb;
-            border-radius: 8px;
+
+        .important-note li {
+            padding: 5px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .important-note li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .amount-display {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
             padding: 20px;
-            margin-bottom: 20px;
-            color: #155724;
-            animation: slideDown 0.5s ease;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 20px;
         }
-        
-        .success-message.show {
-            display: block;
-        }
-        
-        .success-message h3 {
+
+        .amount-display h3 {
+            font-size: 1.5em;
             margin-bottom: 10px;
-            color: #155724;
         }
-        
-        /* Responsive */
+
+        .amount-display .amount {
+            font-size: 2.5em;
+            font-weight: bold;
+        }
+
         @media (max-width: 768px) {
             .header h1 {
-                font-size: 24px;
+                font-size: 1.8em;
             }
             
-            .header p {
-                font-size: 16px;
-            }
-            
-            .offer-price {
-                font-size: 28px;
-            }
-            
-            .content {
-                padding: 30px 20px;
-            }
-            
-            .payment-detail {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            
-            .copy-btn {
-                width: 100%;
-                margin-top: 10px;
+            .pricing-cards {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -499,68 +326,66 @@
         <div class="header">
             <h1>🎯 Transform Academy</h1>
             <p>Reprogrammer ses Croyances Limitantes</p>
+            <div class="founder-badge">⚡ OFFRE FOUNDER MEMBER - Places Limitées</div>
         </div>
-        
+
+        <div class="success-message">
+            <h3>✅ Inscription validée !</h3>
+            <p>Merci pour votre confiance. Consultez les instructions de paiement ci-dessous.</p>
+        </div>
+
         <div class="content">
-            <div id="successMessage" class="success-message">
-                <h3>✅ Inscription validée !</h3>
-                <p>Merci pour votre confiance. Consultez les instructions de paiement ci-dessous.</p>
-            </div>
+            <h2 class="section-title">Choisissez votre formule</h2>
             
+            <div class="pricing-cards">
+                <div class="pricing-card" id="essentiel" onclick="selectPlan('essentiel', 10000)">
+                    <div class="badge">✨ FOUNDER</div>
+                    <h3>Essentiel</h3>
+                    <div class="original-price">25 000 FCFA</div>
+                    <div class="price">10 000 FCFA</div>
+                    <ul>
+                        <li>8 vidéos de formation</li>
+                        <li>4 cahiers d'exercices PDF</li>
+                        <li>Accès à vie</li>
+                        <li>Support par email</li>
+                    </ul>
+                </div>
+
+                <div class="pricing-card" id="premium" onclick="selectPlan('premium', 20000)">
+                    <div class="badge">✨ FOUNDER</div>
+                    <h3>Premium</h3>
+                    <div class="original-price">50 000 FCFA</div>
+                    <div class="price">20 000 FCFA</div>
+                    <ul>
+                        <li>8 vidéos de formation</li>
+                        <li>4 cahiers d'exercices PDF</li>
+                        <li>Accès à vie</li>
+                        <li>2 séances de coaching</li>
+                        <li>Support prioritaire</li>
+                        <li>Certificat de réussite</li>
+                    </ul>
+                </div>
+            </div>
+
             <form id="inscriptionForm">
-                <h2 style="margin-bottom: 20px; color: #333;">Choisissez votre formule</h2>
-                
-                <div class="offers">
-                    <div class="offer-card" onclick="selectOffer('essentiel')">
-                        <div class="offer-badge">✨ SÉLECTIONNÉ</div>
-                        <input type="radio" name="offre" value="essentiel" id="offreEssentiel" required>
-                        <div class="offer-name">Essentiel</div>
-                        <div class="offer-price">25 000 FCFA</div>
-                        <ul class="offer-features">
-                            <li>8 vidéos de formation</li>
-                            <li>4 cahiers d'exercices PDF</li>
-                            <li>Accès à vie</li>
-                            <li>Support par email</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="offer-card" onclick="selectOffer('premium')">
-                        <div class="offer-badge">✨ SÉLECTIONNÉ</div>
-                        <input type="radio" name="offre" value="premium" id="offrePremium" required>
-                        <div class="offer-name">Premium</div>
-                        <div class="offer-price">50 000 FCFA</div>
-                        <ul class="offer-features">
-                            <li>8 vidéos de formation</li>
-                            <li>4 cahiers d'exercices PDF</li>
-                            <li>Accès à vie</li>
-                            <li>2 séances de coaching</li>
-                            <li>Support prioritaire</li>
-                            <li>Certificat de réussite</li>
-                        </ul>
-                    </div>
-                </div>
-                
                 <div class="form-group">
-                    <label for="nom">Nom complet <span class="required">*</span></label>
-                    <input type="text" id="nom" name="nom" required placeholder="Votre nom complet">
-                    <div class="validation-message" id="nomValidation"></div>
+                    <label for="nom">Nom complet *</label>
+                    <input type="text" id="nom" required>
                 </div>
-                
+
                 <div class="form-group">
-                    <label for="email">Email <span class="required">*</span></label>
-                    <input type="email" id="email" name="email" required placeholder="votre.email@example.com">
-                    <div class="validation-message" id="emailValidation"></div>
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" required>
                 </div>
-                
+
                 <div class="form-group">
-                    <label for="telephone">Téléphone <span class="required">*</span></label>
-                    <input type="tel" id="telephone" name="telephone" required placeholder="+225 XX XX XX XX XX">
-                    <div class="validation-message" id="telephoneValidation"></div>
+                    <label for="telephone">Téléphone *</label>
+                    <input type="tel" id="telephone" required>
                 </div>
-                
+
                 <div class="form-group">
-                    <label for="modePaiement">Mode de paiement préféré <span class="required">*</span></label>
-                    <select id="modePaiement" name="modePaiement" required>
+                    <label for="paiement">Mode de paiement préféré *</label>
+                    <select id="paiement" required>
                         <option value="">-- Sélectionnez --</option>
                         <option value="orange">Orange Money</option>
                         <option value="mtn">MTN Money</option>
@@ -568,267 +393,127 @@
                         <option value="virement">Virement bancaire</option>
                     </select>
                 </div>
-                
-                <button type="submit" class="submit-btn" id="submitBtn">
-                    <span>Valider mon inscription</span>
-                    <div class="loading-spinner"></div>
-                </button>
+
+                <button type="submit" class="submit-btn">Valider mon inscription</button>
             </form>
-            
-            <div id="paymentInstructions" class="payment-instructions">
-                <h3>📋 Instructions de paiement</h3>
+
+            <div class="payment-instructions">
+                <h3 style="text-align: center; color: #2c3e50; margin-bottom: 20px;">📋 Instructions de paiement</h3>
                 
-                <div class="payment-method" id="orangeMethod" style="display:none;">
+                <div class="payment-method">
                     <h4>🟠 Orange Money</h4>
                     <p>Effectuez votre transfert vers :</p>
                     <div class="payment-detail">
-                        <span>Numéro : <strong id="orangeNumber">+225 07 78 15 78 76</strong></span>
-                        <button type="button" class="copy-btn" onclick="copyText('orangeNumber', this)">Copier</button>
+                        <div>Numéro : <strong>+225 07 78 15 78 76</strong></div>
+                        <button class="copy-btn" onclick="copyText('+225 07 78 15 78 76')">Copier</button>
                     </div>
                     <div class="payment-detail">
-                        <span>Nom : <strong>SARR ALIOUNE</strong></span>
+                        <div>Nom : <strong>SARR ALIOUNE</strong></div>
                     </div>
                 </div>
-                
-                <div class="payment-method" id="mtnMethod" style="display:none;">
+
+                <div class="payment-method">
                     <h4>🟡 MTN Money</h4>
                     <p>Effectuez votre transfert vers :</p>
                     <div class="payment-detail">
-                        <span>Numéro : <strong id="mtnNumber">+225 05 05 68 29 75</strong></span>
-                        <button type="button" class="copy-btn" onclick="copyText('mtnNumber', this)">Copier</button>
+                        <div>Numéro : <strong>+225 05 05 68 29 75</strong></div>
+                        <button class="copy-btn" onclick="copyText('+225 05 05 68 29 75')">Copier</button>
                     </div>
                     <div class="payment-detail">
-                        <span>Nom : <strong>SARR ALIOUNE</strong></span>
+                        <div>Nom : <strong>SARR ALIOUNE</strong></div>
                     </div>
                 </div>
-                
-                <div class="payment-method" id="waveMethod" style="display:none;">
+
+                <div class="payment-method">
                     <h4>🔵 Wave</h4>
                     <p>Effectuez votre transfert vers :</p>
                     <div class="payment-detail">
-                        <span>Numéro : <strong id="waveNumber">+225 07 78 15 78 76</strong></span>
-                        <button type="button" class="copy-btn" onclick="copyText('waveNumber', this)">Copier</button>
+                        <div>Numéro : <strong>+225 07 78 15 78 76</strong></div>
+                        <button class="copy-btn" onclick="copyText('+225 07 78 15 78 76')">Copier</button>
                     </div>
                     <div class="payment-detail">
-                        <span>Nom : <strong>SARR ALIOUNE</strong></span>
+                        <div>Nom : <strong>SARR ALIOUNE</strong></div>
                     </div>
                 </div>
-                
-                <div class="payment-method" id="virementMethod" style="display:none;">
+
+                <div class="payment-method">
                     <h4>🏦 Virement bancaire</h4>
                     <p>Effectuez votre virement vers :</p>
                     <div class="payment-detail">
-                        <span>Banque : <strong>SGCI (Société Générale Côte d'Ivoire) - Agence Cocody 2 Plateaux</strong></span>
+                        <div>Banque : <strong>SGCI (Société Générale Côte d'Ivoire) - Agence Cocody 2 Plateaux</strong></div>
                     </div>
                     <div class="payment-detail">
-                        <span>Numéro de compte : <strong id="bankAccount">CI008011224362768017</strong></span>
-                        <button type="button" class="copy-btn" onclick="copyText('bankAccount', this)">Copier</button>
+                        <div>Numéro de compte : <strong>CI008011224362768017</strong></div>
+                        <button class="copy-btn" onclick="copyText('CI008011224362768017')">Copier</button>
                     </div>
                     <div class="payment-detail">
-                        <span>Titulaire : <strong>SARR ALIOUNE</strong></span>
+                        <div>Titulaire : <strong>SARR ALIOUNE</strong></div>
                     </div>
                 </div>
-                
-                <div class="info-box">
-                    <strong>⚠️ Important :</strong><br>
-                    • Après le paiement, envoyez la capture d'écran à : <strong>contact.transformacademy@gmail.com</strong><br>
-                    • Mentionnez votre nom et votre email d'inscription<br>
-                    • Vous recevrez vos accès sous 24h maximum
+
+                <div class="important-note">
+                    <h4>⚠️ Important :</h4>
+                    <ul>
+                        <li>Après le paiement, envoyez la capture d'écran à : <strong>contact.transformacademy@gmail.com</strong></li>
+                        <li>Mentionnez votre nom et votre email d'inscription</li>
+                        <li>Vous recevrez vos accès sous 24h maximum</li>
+                    </ul>
                 </div>
-                
-                <div style="margin-top: 20px; text-align: center; color: #666;">
-                    <p>Montant à payer : <strong id="montantAPayer" style="color: #667eea; font-size: 24px;">--</strong></p>
+
+                <div class="amount-display" id="amountDisplay" style="display: none;">
+                    <h3>Montant à payer :</h3>
+                    <div class="amount" id="selectedAmount">--</div>
                 </div>
             </div>
         </div>
     </div>
-    
+
     <script>
-        // Validation en temps réel
-        const nomInput = document.getElementById('nom');
-        const emailInput = document.getElementById('email');
-        const telephoneInput = document.getElementById('telephone');
-        
-        // Validation du nom
-        nomInput.addEventListener('input', function() {
-            const validation = document.getElementById('nomValidation');
-            if (this.value.trim().length < 3) {
-                this.classList.remove('valid');
-                this.classList.add('invalid');
-                validation.textContent = '❌ Le nom doit contenir au moins 3 caractères';
-                validation.className = 'validation-message error show';
-            } else {
-                this.classList.remove('invalid');
-                this.classList.add('valid');
-                validation.textContent = '✓ Nom valide';
-                validation.className = 'validation-message success show';
-            }
-        });
-        
-        // Validation de l'email
-        emailInput.addEventListener('input', function() {
-            const validation = document.getElementById('emailValidation');
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(this.value)) {
-                this.classList.remove('valid');
-                this.classList.add('invalid');
-                validation.textContent = '❌ Email invalide';
-                validation.className = 'validation-message error show';
-            } else {
-                this.classList.remove('invalid');
-                this.classList.add('valid');
-                validation.textContent = '✓ Email valide';
-                validation.className = 'validation-message success show';
-            }
-        });
-        
-        // Validation du téléphone
-        telephoneInput.addEventListener('input', function() {
-            const validation = document.getElementById('telephoneValidation');
-            const phoneRegex = /^\+?[0-9\s]{8,}$/;
-            if (!phoneRegex.test(this.value)) {
-                this.classList.remove('valid');
-                this.classList.add('invalid');
-                validation.textContent = '❌ Numéro de téléphone invalide';
-                validation.className = 'validation-message error show';
-            } else {
-                this.classList.remove('invalid');
-                this.classList.add('valid');
-                validation.textContent = '✓ Numéro valide';
-                validation.className = 'validation-message success show';
-            }
-        });
-        
-        // Fonction pour sélectionner une offre
-        function selectOffer(offerType) {
-            document.querySelectorAll('.offer-card').forEach(card => {
+        let selectedPlanType = '';
+        let selectedAmount = 0;
+
+        function selectPlan(plan, amount) {
+            // Retirer la sélection précédente
+            document.querySelectorAll('.pricing-card').forEach(card => {
                 card.classList.remove('selected');
             });
             
-            if (offerType === 'essentiel') {
-                document.getElementById('offreEssentiel').checked = true;
-                document.querySelector('.offer-card:first-child').classList.add('selected');
-            } else {
-                document.getElementById('offrePremium').checked = true;
-                document.querySelector('.offer-card:last-child').classList.add('selected');
-            }
+            // Ajouter la sélection
+            document.getElementById(plan).classList.add('selected');
+            
+            // Enregistrer la sélection
+            selectedPlanType = plan;
+            selectedAmount = amount;
+            
+            // Afficher le montant
+            document.getElementById('amountDisplay').style.display = 'block';
+            document.getElementById('selectedAmount').textContent = amount.toLocaleString() + ' FCFA';
         }
-        
-        // Fonction pour copier du texte
-        function copyText(elementId, button) {
-            const text = document.getElementById(elementId).textContent;
-            navigator.clipboard.writeText(text).then(function() {
-                button.textContent = '✅ Copié !';
-                button.classList.add('copied');
-                setTimeout(() => {
-                    button.textContent = 'Copier';
-                    button.classList.remove('copied');
-                }, 2000);
-            }).catch(function(err) {
-                alert('❌ Erreur lors de la copie');
+
+        function copyText(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Copié dans le presse-papier !');
             });
         }
-        
-        // Gestion du formulaire SANS Web3Forms
+
         document.getElementById('inscriptionForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
-            const submitBtn = document.getElementById('submitBtn');
-            const nom = document.getElementById('nom').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const telephone = document.getElementById('telephone').value.trim();
-            const offreElement = document.querySelector('input[name="offre"]:checked');
-            const modePaiement = document.getElementById('modePaiement').value;
-            
-            // Vérifications
-            if (!offreElement) {
-                alert('❌ Veuillez sélectionner une formule (Essentiel ou Premium)');
+            if (!selectedPlanType) {
+                alert('Veuillez sélectionner une formule');
                 return;
             }
             
-            if (!nom || nom.length < 3) {
-                alert('❌ Veuillez entrer votre nom complet (minimum 3 caractères)');
-                return;
-            }
+            const nom = document.getElementById('nom').value;
+            const email = document.getElementById('email').value;
+            const telephone = document.getElementById('telephone').value;
+            const paiement = document.getElementById('paiement').value;
             
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                alert('❌ Veuillez entrer une adresse email valide');
-                return;
-            }
+            // Ici tu peux ajouter l'envoi des données par email ou autre
+            alert('Inscription validée ! Veuillez procéder au paiement selon les instructions ci-dessus.');
             
-            const phoneRegex = /^\+?[0-9\s]{8,}$/;
-            if (!phoneRegex.test(telephone)) {
-                alert('❌ Veuillez entrer un numéro de téléphone valide');
-                return;
-            }
-            
-            if (!modePaiement) {
-                alert('❌ Veuillez sélectionner un mode de paiement');
-                return;
-            }
-            
-            const offre = offreElement.value;
-            const montant = offre === 'essentiel' ? '25 000 FCFA' : '50 000 FCFA';
-            
-            // Activer le mode loading
-            submitBtn.classList.add('loading');
-            submitBtn.disabled = true;
-            
-            // Simuler un délai de traitement (pour l'effet visuel)
-            setTimeout(function() {
-                // Afficher le message de succès
-                document.getElementById('successMessage').classList.add('show');
-                
-                // Déterminer le montant
-                document.getElementById('montantAPayer').textContent = montant;
-                
-                // Masquer tous les modes de paiement
-                document.getElementById('orangeMethod').style.display = 'none';
-                document.getElementById('mtnMethod').style.display = 'none';
-                document.getElementById('waveMethod').style.display = 'none';
-                document.getElementById('virementMethod').style.display = 'none';
-                
-                // Afficher le mode de paiement sélectionné
-                const methodMap = {
-                    'orange': 'orangeMethod',
-                    'mtn': 'mtnMethod',
-                    'wave': 'waveMethod',
-                    'virement': 'virementMethod'
-                };
-                
-                document.getElementById(methodMap[modePaiement]).style.display = 'block';
-                
-                // Afficher les instructions de paiement
-                document.getElementById('paymentInstructions').classList.add('show');
-                
-                // Réinitialiser le bouton
-                submitBtn.classList.remove('loading');
-                submitBtn.disabled = false;
-                
-                // Message de confirmation
-                const formuleTexte = offre === 'essentiel' ? 'Essentiel' : 'Premium';
-                
-                // Scroller vers les instructions
-                setTimeout(function() {
-                    document.getElementById('paymentInstructions').scrollIntoView({ 
-                        behavior: 'smooth', 
-                        block: 'start' 
-                    });
-                }, 300);
-                
-                // Optionnel : Envoyer les données à votre email via un service comme FormSubmit
-                // Vous pourrez activer cette fonctionnalité plus tard
-                console.log('Inscription:', {
-                    nom: nom,
-                    email: email,
-                    telephone: telephone,
-                    offre: formuleTexte,
-                    modePaiement: modePaiement,
-                    montant: montant
-                });
-                
-            }, 1000); // Délai de 1 seconde pour l'effet visuel
+            // Scroll vers les instructions de paiement
+            document.querySelector('.payment-instructions').scrollIntoView({ behavior: 'smooth' });
         });
     </script>
 </body>
