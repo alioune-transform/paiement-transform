@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎯 Transform Academy - Inscription</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.95;
+        }
+
+        .success-message {
+            background: #d4edda;
+            border: 2px solid #28a745;
+            color: #155724;
+            padding: 20px;
+            margin: 30px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .success-message h3 {
+            font-size: 1.3em;
+            margin-bottom: 10px;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            color: #2c3e50;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .pricing-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .pricing-card {
+            border: 2px solid #e0e0e0;
+            border-radius: 15px;
+            padding: 25px;
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .pricing-card:hover {
+            border-color: #667eea;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+        }
+
+        .pricing-card.selected {
+            border-color: #667eea;
+            background: linear-gradient(135deg, #f8f9ff 0%, #e8ebff 100%);
+            border-width: 3px;
+        }
+
+        .pricing-card .badge {
+            position: absolute;
+            top: -12px;
+            right: 20px;
+            background: #667eea;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: bold;
+        }
+
+        .pricing-card h3 {
+            font-size: 1.5em;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .pricing-card .price {
+            font-size: 2.2em;
+            color: #667eea;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .pricing-card ul {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .pricing-card li {
+            padding: 8px 0;
+            color: #555;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .pricing-card li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .submit-btn:hover {
+            transform: scale(1.02);
+        }
+
+        .payment-instructions {
+            margin-top: 40px;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 15px;
+        }
+
+        .payment-method {
+            background: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            border: 2px solid #e0e0e0;
+        }
+
+        .payment-method h4 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .payment-detail {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background: #f8f9fa;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+
+        .payment-detail strong {
+            color: #667eea;
+        }
+
+        .copy-btn {
+            padding: 5px 15px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+
+        .copy-btn:hover {
+            background: #5568d3;
+        }
+
+        .important-note {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .important-note h4 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+
+        .important-note ul {
+            list-style: none;
+            color: #856404;
+        }
+
+        .important-note li {
+            padding: 5px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .important-note li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .amount-display {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .amount-display h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        .amount-display .amount {
+            font-size: 2.5em;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .pricing-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 Transform Academy</h1>
+            <p>Reprogrammer ses Croyances Limitantes</p>
+        </div>
+
+        <div class="success-message">
+            <h3>✅ Inscription validée !</h3>
+            <p>Merci pour votre confiance. Consultez les instructions de paiement ci-dessous.</p>
+        </div>
+
+        <div class="content">
+            <h2 class="section-title">Choisissez votre formule</h2>
+            
+            <div class="pricing-cards">
+                <div class="pricing-card" id="essentiel" onclick="selectPlan('essentiel', 25000)">
+                    <div class="badge">✨ SÉLECTIONNÉ</div>
+                    <h3>Essentiel</h3>
+                    <div class="price">25 000 FCFA</div>
+                    <ul>
+                        <li>8 vidéos de formation</li>
+                        <li>4 cahiers d'exercices PDF</li>
+                        <li>Accès à vie</li>
+                        <li>Support par email</li>
+                    </ul>
+                </div>
+
+                <div class="pricing-card" id="premium" onclick="selectPlan('premium', 50000)">
+                    <div class="badge">✨ SÉLECTIONNÉ</div>
+                    <h3>Premium</h3>
+                    <div class="price">50 000 FCFA</div>
+                    <ul>
+                        <li>8 vidéos de formation</li>
+                        <li>4 cahiers d'exercices PDF</li>
+                        <li>Accès à vie</li>
+                        <li>2 séances de coaching</li>
+                        <li>Support prioritaire</li>
+                        <li>Certificat de réussite</li>
+                    </ul>
+                </div>
+            </div>
+
+            <form id="inscriptionForm">
+                <div class="form-group">
+                    <label for="nom">Nom complet *</label>
+                    <input type="text" id="nom" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="telephone">Téléphone *</label>
+                    <input type="tel" id="telephone" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="paiement">Mode de paiement préféré *</label>
+                    <select id="paiement" required>
+                        <option value="">-- Sélectionnez --</option>
+                        <option value="orange">Orange Money</option>
+                        <option value="mtn">MTN Money</option>
+                        <option value="wave">Wave</option>
+                        <option value="virement">Virement bancaire</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="submit-btn">Valider mon inscription</button>
+            </form>
+
+            <div class="payment-instructions">
+                <h3 style="text-align: center; color: #2c3e50; margin-bottom: 20px;">📋 Instructions de paiement</h3>
+                
+                <div class="payment-method">
+                    <h4>🟠 Orange Money</h4>
+                    <p>Effectuez votre transfert vers :</p>
+                    <div class="payment-detail">
+                        <div>Numéro : <strong>+225 07 78 15 78 76</strong></div>
+                        <button class="copy-btn" onclick="copyText('+225 07 78 15 78 76')">Copier</button>
+                    </div>
+                    <div class="payment-detail">
+                        <div>Nom : <strong>SARR ALIOUNE</strong></div>
+                    </div>
+                </div>
+
+                <div class="payment-method">
+                    <h4>🟡 MTN Money</h4>
+                    <p>Effectuez votre transfert vers :</p>
+                    <div class="payment-detail">
+                        <div>Numéro : <strong>+225 05 05 68 29 75</strong></div>
+                        <button class="copy-btn" onclick="copyText('+225 05 05 68 29 75')">Copier</button>
+                    </div>
+                    <div class="payment-detail">
+                        <div>Nom : <strong>SARR ALIOUNE</strong></div>
+                    </div>
+                </div>
+
+                <div class="payment-method">
+                    <h4>🔵 Wave</h4>
+                    <p>Effectuez votre transfert vers :</p>
+                    <div class="payment-detail">
+                        <div>Numéro : <strong>+225 07 78 15 78 76</strong></div>
+                        <button class="copy-btn" onclick="copyText('+225 07 78 15 78 76')">Copier</button>
+                    </div>
+                    <div class="payment-detail">
+                        <div>Nom : <strong>SARR ALIOUNE</strong></div>
+                    </div>
+                </div>
+
+                <div class="payment-method">
+                    <h4>🏦 Virement bancaire</h4>
+                    <p>Effectuez votre virement vers :</p>
+                    <div class="payment-detail">
+                        <div>Banque : <strong>SGCI (Société Générale Côte d'Ivoire) - Agence Cocody 2 Plateaux</strong></div>
+                    </div>
+                    <div class="payment-detail">
+                        <div>Numéro de compte : <strong>CI008011224362768017</strong></div>
+                        <button class="copy-btn" onclick="copyText('CI008011224362768017')">Copier</button>
+                    </div>
+                    <div class="payment-detail">
+                        <div>Titulaire : <strong>SARR ALIOUNE</strong></div>
+                    </div>
+                </div>
+
+                <div class="important-note">
+                    <h4>⚠️ Important :</h4>
+                    <ul>
+                        <li>Après le paiement, envoyez la capture d'écran à : <strong>contact.transformacademy@gmail.com</strong></li>
+                        <li>Mentionnez votre nom et votre email d'inscription</li>
+                        <li>Vous recevrez vos accès sous 24h maximum</li>
+                    </ul>
+                </div>
+
+                <div class="amount-display" id="amountDisplay" style="display: none;">
+                    <h3>Montant à payer :</h3>
+                    <div class="amount" id="selectedAmount">--</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let selectedPlanType = '';
+        let selectedAmount = 0;
+
+        function selectPlan(plan, amount) {
+            // Retirer la sélection précédente
+            document.querySelectorAll('.pricing-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            
+            // Ajouter la sélection
+            document.getElementById(plan).classList.add('selected');
+            
+            // Enregistrer la sélection
+            selectedPlanType = plan;
+            selectedAmount = amount;
+            
+            // Afficher le montant
+            document.getElementById('amountDisplay').style.display = 'block';
+            document.getElementById('selectedAmount').textContent = amount.toLocaleString() + ' FCFA';
+        }
+
+        function copyText(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Copié dans le presse-papier !');
+            });
+        }
+
+        document.getElementById('inscriptionForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (!selectedPlanType) {
+                alert('Veuillez sélectionner une formule');
+                return;
+            }
+            
+            const nom = document.getElementById('nom').value;
+            const email = document.getElementById('email').value;
+            const telephone = document.getElementById('telephone').value;
+            const paiement = document.getElementById('paiement').value;
+            
+            // Ici tu peux ajouter l'envoi des données par email ou autre
+            alert('Inscription validée ! Veuillez procéder au paiement selon les instructions ci-dessus.');
+            
+            // Scroll vers les instructions de paiement
+            document.querySelector('.payment-instructions').scrollIntoView({ behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
