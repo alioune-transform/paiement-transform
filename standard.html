@@ -192,6 +192,11 @@
             padding: 30px;
             background: #f8f9fa;
             border-radius: 15px;
+            display: none;
+        }
+
+        .payment-instructions.show {
+            display: block;
         }
 
         .payment-method {
@@ -200,6 +205,11 @@
             margin-bottom: 15px;
             border-radius: 10px;
             border: 2px solid #e0e0e0;
+            display: none;
+        }
+
+        .payment-method.active {
+            display: block;
         }
 
         .payment-method h4 {
@@ -370,46 +380,46 @@
                 <button type="submit" class="submit-btn">Valider mon inscription</button>
             </form>
 
-            <div class="payment-instructions">
+            <div class="payment-instructions" id="paymentInstructions">
                 <h3 style="text-align: center; color: #2c3e50; margin-bottom: 20px;">📋 Instructions de paiement</h3>
                 
-                <div class="payment-method">
+                <div class="payment-method" id="method-orange">
                     <h4>🟠 Orange Money</h4>
                     <p>Effectuez votre transfert vers :</p>
                     <div class="payment-detail">
                         <div>Numéro : <strong>+225 07 78 15 78 76</strong></div>
-                        <button class="copy-btn" onclick="copyText('+225 07 78 15 78 76')">Copier</button>
+                        <button type="button" class="copy-btn" onclick="copyText('+225 07 78 15 78 76')">Copier</button>
                     </div>
                     <div class="payment-detail">
                         <div>Nom : <strong>SARR ALIOUNE</strong></div>
                     </div>
                 </div>
 
-                <div class="payment-method">
+                <div class="payment-method" id="method-mtn">
                     <h4>🟡 MTN Money</h4>
                     <p>Effectuez votre transfert vers :</p>
                     <div class="payment-detail">
                         <div>Numéro : <strong>+225 05 05 68 29 75</strong></div>
-                        <button class="copy-btn" onclick="copyText('+225 05 05 68 29 75')">Copier</button>
+                        <button type="button" class="copy-btn" onclick="copyText('+225 05 05 68 29 75')">Copier</button>
                     </div>
                     <div class="payment-detail">
                         <div>Nom : <strong>SARR ALIOUNE</strong></div>
                     </div>
                 </div>
 
-                <div class="payment-method">
+                <div class="payment-method" id="method-wave">
                     <h4>🔵 Wave</h4>
                     <p>Effectuez votre transfert vers :</p>
                     <div class="payment-detail">
                         <div>Numéro : <strong>+225 07 78 15 78 76</strong></div>
-                        <button class="copy-btn" onclick="copyText('+225 07 78 15 78 76')">Copier</button>
+                        <button type="button" class="copy-btn" onclick="copyText('+225 07 78 15 78 76')">Copier</button>
                     </div>
                     <div class="payment-detail">
                         <div>Nom : <strong>SARR ALIOUNE</strong></div>
                     </div>
                 </div>
 
-                <div class="payment-method">
+                <div class="payment-method" id="method-virement">
                     <h4>🏦 Virement bancaire</h4>
                     <p>Effectuez votre virement vers :</p>
                     <div class="payment-detail">
@@ -417,7 +427,7 @@
                     </div>
                     <div class="payment-detail">
                         <div>Numéro de compte : <strong>CI008011224362768017</strong></div>
-                        <button class="copy-btn" onclick="copyText('CI008011224362768017')">Copier</button>
+                        <button type="button" class="copy-btn" onclick="copyText('CI008011224362768017')">Copier</button>
                     </div>
                     <div class="payment-detail">
                         <div>Titulaire : <strong>SARR ALIOUNE</strong></div>
@@ -446,19 +456,15 @@
         let selectedAmount = 0;
 
         function selectPlan(plan, amount) {
-            // Retirer la sélection précédente
             document.querySelectorAll('.pricing-card').forEach(card => {
                 card.classList.remove('selected');
             });
             
-            // Ajouter la sélection
             document.getElementById(plan).classList.add('selected');
             
-            // Enregistrer la sélection
             selectedPlanType = plan;
             selectedAmount = amount;
             
-            // Afficher le montant
             document.getElementById('amountDisplay').style.display = 'block';
             document.getElementById('selectedAmount').textContent = amount.toLocaleString() + ' FCFA';
         }
@@ -477,16 +483,26 @@
                 return;
             }
             
-            const nom = document.getElementById('nom').value;
-            const email = document.getElementById('email').value;
-            const telephone = document.getElementById('telephone').value;
             const paiement = document.getElementById('paiement').value;
             
-            // Ici tu peux ajouter l'envoi des données par email ou autre
-            alert('Inscription validée ! Veuillez procéder au paiement selon les instructions ci-dessus.');
+            if (!paiement) {
+                alert('Veuillez sélectionner un mode de paiement');
+                return;
+            }
             
-            // Scroll vers les instructions de paiement
-            document.querySelector('.payment-instructions').scrollIntoView({ behavior: 'smooth' });
+            // Masquer tous les modes de paiement
+            document.querySelectorAll('.payment-method').forEach(method => {
+                method.classList.remove('active');
+            });
+            
+            // Afficher seulement le mode sélectionné
+            document.getElementById('method-' + paiement).classList.add('active');
+            
+            // Afficher la section instructions
+            document.getElementById('paymentInstructions').classList.add('show');
+            
+            // Scroll vers les instructions
+            document.getElementById('paymentInstructions').scrollIntoView({ behavior: 'smooth' });
         });
     </script>
 </body>
