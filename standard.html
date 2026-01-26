@@ -256,25 +256,87 @@
 
         .important-note h4 {
             color: #856404;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            font-size: 1.2em;
         }
 
-        .important-note ul {
+        /* NOUVELLE SECTION EMAIL - OPTIMISÉE POUR MOBILE */
+        .email-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .email-section h4 {
+            color: white;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .email-display {
+            background: white;
+            color: #667eea;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            word-break: break-all;
+        }
+
+        .email-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .email-btn {
+            flex: 1;
+            min-width: 140px;
+            padding: 12px 20px;
+            background: white;
+            color: #667eea;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .email-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .email-btn:active {
+            transform: scale(0.98);
+        }
+
+        .instruction-list {
             list-style: none;
             color: #856404;
+            text-align: left;
         }
 
-        .important-note li {
-            padding: 5px 0;
-            padding-left: 20px;
+        .instruction-list li {
+            padding: 10px 0;
+            padding-left: 30px;
             position: relative;
+            font-size: 1.05em;
         }
 
-        .important-note li:before {
-            content: "•";
+        .instruction-list li:before {
+            content: "✓";
             position: absolute;
             left: 0;
             font-weight: bold;
+            color: #28a745;
+            font-size: 1.2em;
         }
 
         .amount-display {
@@ -296,6 +358,35 @@
             font-weight: bold;
         }
 
+        .success-toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #28a745;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            display: none;
+            z-index: 1000;
+        }
+
+        .success-toast.show {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
         @media (max-width: 768px) {
             .header h1 {
                 font-size: 1.8em;
@@ -303,6 +394,18 @@
             
             .pricing-cards {
                 grid-template-columns: 1fr;
+            }
+
+            .email-display {
+                font-size: 0.95em;
+            }
+
+            .email-actions {
+                flex-direction: column;
+            }
+
+            .email-btn {
+                width: 100%;
             }
         }
     </style>
@@ -434,12 +537,29 @@
                     </div>
                 </div>
 
+                <!-- NOUVELLE SECTION EMAIL AMÉLIORÉE -->
+                <div class="email-section">
+                    <h4>📧 Envoyez votre preuve de paiement</h4>
+                    <div class="email-display">
+                        contact.transformacademy@gmail.com
+                    </div>
+                    <div class="email-actions">
+                        <button type="button" class="email-btn" onclick="copyEmail()">
+                            📋 Copier l'email
+                        </button>
+                        <button type="button" class="email-btn" onclick="openEmail()">
+                            ✉️ Envoyer maintenant
+                        </button>
+                    </div>
+                </div>
+
                 <div class="important-note">
-                    <h4>⚠️ Important :</h4>
-                    <ul>
-                        <li>Après le paiement, envoyez la capture d'écran à : <strong>contact.transformacademy@gmail.com</strong></li>
-                        <li>Mentionnez votre nom et votre email d'inscription</li>
-                        <li>Vous recevrez vos accès sous 24h maximum</li>
+                    <h4>⚠️ Étapes à suivre :</h4>
+                    <ul class="instruction-list">
+                        <li>Effectuez votre paiement via le mode choisi ci-dessus</li>
+                        <li>Prenez une capture d'écran de votre paiement</li>
+                        <li>Envoyez la capture + votre nom + votre email à l'adresse ci-dessus</li>
+                        <li>Vous recevrez vos accès de formation sous 24h maximum</li>
                     </ul>
                 </div>
 
@@ -451,9 +571,15 @@
         </div>
     </div>
 
+    <!-- Toast de confirmation -->
+    <div class="success-toast" id="successToast">
+        ✓ Copié dans le presse-papier !
+    </div>
+
     <script>
         let selectedPlanType = '';
         let selectedAmount = 0;
+        const EMAIL_ADDRESS = 'contact.transformacademy@gmail.com';
 
         function selectPlan(plan, amount) {
             document.querySelectorAll('.pricing-card').forEach(card => {
@@ -471,8 +597,32 @@
 
         function copyText(text) {
             navigator.clipboard.writeText(text).then(() => {
-                alert('Copié dans le presse-papier !');
+                showToast();
+            }).catch(() => {
+                alert('Copié : ' + text);
             });
+        }
+
+        function copyEmail() {
+            navigator.clipboard.writeText(EMAIL_ADDRESS).then(() => {
+                showToast();
+            }).catch(() => {
+                alert('Adresse email : ' + EMAIL_ADDRESS);
+            });
+        }
+
+        function openEmail() {
+            const subject = encodeURIComponent('Preuve de paiement - Transform Academy');
+            const body = encodeURIComponent('Bonjour,\n\nVeuillez trouver ci-joint ma preuve de paiement.\n\nNom : \nEmail : \nFormule choisie : \n\nCordialement');
+            window.location.href = `mailto:${EMAIL_ADDRESS}?subject=${subject}&body=${body}`;
+        }
+
+        function showToast() {
+            const toast = document.getElementById('successToast');
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
         }
 
         document.getElementById('inscriptionForm').addEventListener('submit', function(e) {
